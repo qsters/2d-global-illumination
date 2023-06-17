@@ -1,0 +1,54 @@
+{
+    "name": "DemoActions",
+    "maps": [
+        {
+            "name": "Swimming",
+            "id": "f63eba51-340f-4582-b1f9-f0726efff31c",
+            "actions": [
+                {
+                    "name": "PointerPosition",
+                    "type": "Value",
+                    "id": "f5e79b55-0a7a-4e93-a06e-ecf754878fee",
+                    "expectedControlType": "Vector2",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": true
+                },
+                {
+                    "name": "SwimForward",
+                    "type": "Button",
+                    "id": "825cc1c2-0cbe-4a7f-b439-2559ce0dc6b8",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": true
+                }
+            ],
+            "bindings": [
+                {
+                    "name": "",
+                    "id": "df2f54aa-dd76-4078-a04e-ba77a3db5791",
+                    "path": "<Mouse>/position",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "PointerPosition",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "6dc5f829-e30c-4d8a-a788-4ed05c219665",
+                    "path": "<Keyboard>/space",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "SwimForward",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                }
+            ]
+        }
+    ],
+    "controlSchemes": []
+}
