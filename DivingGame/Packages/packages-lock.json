@@ -274,6 +274,13 @@
       },
       "url": "https://packages.unity.com"
     },
+    "www.nulltale.gilight2d": {
+      "version": "https://github.com/NullTale/GiLight2D.git",
+      "depth": 0,
+      "source": "git",
+      "dependencies": {},
+      "hash": "6bb5bd6fd2e4ebb9ab8920d0dd7b42ca79098260"
+    },
     "com.unity.modules.ai": {
       "version": "1.0.0",
       "depth": 0,

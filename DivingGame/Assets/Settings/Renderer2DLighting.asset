@@ -1,5 +1,32 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
+--- !u!114 &-3066654663120277770
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ac45ca13aba4a46358db04aeef0be00b, type: 3}
+  m_Name: RayMarchingRenderFeature
+  m_EditorClassIdentifier: 
+  m_Active: 1
+  _debugMaterial: {fileID: 2100000, guid: 572ce410ee2ea4ffa93aaa361a8f9802, type: 2}
+  _jumpFloodMaterial: {fileID: 2100000, guid: 80276e0020dd54de3b162e3b0e0c2296, type: 2}
+  _rayMarchLightingMaterial: {fileID: 2100000, guid: 511b63c5aa8e8448b93d446c8eb0c259, type: 2}
+  _settings:
+    renderPassEvent: 250
+    layerMask:
+      serializedVersion: 2
+      m_Bits: 192
+    cameraScaleOffset: 1.75
+    downscaleAmount: 2
+    samples: 50
+    timeSpan: 8
+    blurStrength: 3
+    fancyBlur: 1
 --- !u!114 &11400000
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -10,13 +37,14 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 11145981673336645838492a2d98e247, type: 3}
-  m_Name: Renderer2D
+  m_Name: Renderer2DLighting
   m_EditorClassIdentifier: 
   debugShaders:
     debugReplacementPS: {fileID: 4800000, guid: cf852408f2e174538bcd9b7fda1c5ae7, type: 3}
     hdrDebugViewPS: {fileID: 4800000, guid: 573620ae32aec764abd4d728906d2587, type: 3}
-  m_RendererFeatures: []
-  m_RendererFeatureMap: 
+  m_RendererFeatures:
+  - {fileID: -3066654663120277770}
+  m_RendererFeatureMap: f6aeebebd40d71d5
   m_UseNativeRenderPass: 0
   m_TransparencySortMode: 0
   m_TransparencySortAxis: {x: 0, y: 1, z: 0}
