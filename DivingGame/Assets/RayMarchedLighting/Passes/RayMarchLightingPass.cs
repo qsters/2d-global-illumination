@@ -93,7 +93,7 @@ namespace CustomLighting
                 DrawingSettings drawingSettings = CreateDrawingSettings(_emissionShaderTagId, ref renderingData, sortingCriteria);
                 
                 // render 
-                context.DrawRenderers(renderingData.cullResults, ref drawingSettings, ref filteringSettings);
+                context.DrawRenderers(_settings.createdCullingResults, ref drawingSettings, ref filteringSettings);
                 cmd.SetGlobalTexture(EMISSION_TEXTURE_NAME, _emissionTexture);
             }
             

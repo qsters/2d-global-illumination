@@ -25,10 +25,12 @@ namespace CustomLighting
             [SerializeField] public float cameraScaleOffset = 1.5f;
             [SerializeField, Range(0, 3)] public int downscaleAmount = 1;
             [SerializeField, Range(1, 1000)] public int samples = 5;
-            [SerializeField, Range(0f, 30f)] public float timeSpan = 2f;
+            [SerializeField, Range(0f, 300f)] public float timeSpan = 2f;
             [SerializeField, Range(0f, 15f)] public float blurStrength = 5f;
             [SerializeField] public bool fancyBlur = true;
             
+            // Used in Passes privately
+            [HideInInspector] public CullingResults createdCullingResults;
         }
         
         // Settings for the Passes
@@ -38,6 +40,8 @@ namespace CustomLighting
         [SerializeField] private Material _rayMarchLightingMaterial;
         
         [SerializeField] public PassSettings _settings;
+        
+        
 
 
         // Passes

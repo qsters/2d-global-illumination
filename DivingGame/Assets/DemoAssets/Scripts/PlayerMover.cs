@@ -7,12 +7,14 @@ using UnityEngine.InputSystem;
 public class PlayerMover : MonoBehaviour
 {
     private Transform playerTransform;
+    private Rigidbody2D playerRigidbody;
     private DemoActions actions;
 
     [SerializeField] private float swimSpeed = 10f;
     private void Awake()
     {
         playerTransform = GetComponent<Transform>();
+        playerRigidbody = GetComponent<Rigidbody2D>();
         actions = new DemoActions();
         
         actions.Swimming.PointerPosition.performed += RotatePlayer;
@@ -24,7 +26,8 @@ public class PlayerMover : MonoBehaviour
 
         if (movingForwardHeld)
         {
-            transform.position += transform.up * (Time.deltaTime * swimSpeed);
+            // Apply force to the rigidbody
+            playerRigidbody.AddForce(transform.up * (Time.deltaTime * swimSpeed));
         }
     }
 

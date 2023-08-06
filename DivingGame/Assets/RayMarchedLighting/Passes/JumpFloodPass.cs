@@ -32,7 +32,6 @@ namespace CustomLighting
         private static readonly String RENDER_SILHOUETTES_PROFILER = "Jump Flood Pass/Render Silhouettes";
         private static readonly String JUMP_FLOOD_PROFILER = "Jump Flood Pass/Jump Flood";
         private static readonly String DISTANCE_FIELD_PROFILER = "Jump Flood Pass/Generate";
-        private static readonly String DEBUG_SCREEN_PROFILER = "Jump Flood Pass/Debug Blit";
         
         // RTHandles for storing our rendering data
         private RTHandle _CameraColorBuffer;
@@ -48,6 +47,7 @@ namespace CustomLighting
         
         // Count of how many times to run the jump flood pass
         private int _jumpFloodPassCount;
+        
         
         public JumpFloodPass(RayMarchingRenderFeature.PassSettings settings, Material debugMaterial, Material jumpFloodMaterial)
         {
@@ -71,12 +71,20 @@ namespace CustomLighting
         public override void Execute(ScriptableRenderContext context, ref RenderingData renderingData)
         {
             CommandBuffer cmd = CommandBufferPool.Get();
-            
+
             // Silhouette Pass
             using (new ProfilingScope(cmd, new ProfilingSampler(RENDER_SILHOUETTES_PROFILER)))
             {
                 context.ExecuteCommandBuffer(cmd);
                 cmd.Clear();
+
+                // Culling the objects to render
+                // Doing this so the camera doesn't render anything but what is set in LayerMask
+                Camera camera = renderingData.cameraData.camera;
+                camera.cullingMask = _settings.layerMask;
+                camera.TryGetCullingParameters(out var cullingParameters);
+                _settings.createdCullingResults = context.Cull(ref cullingParameters);
+                camera.cullingMask = 0;
                 
                 // Setting Data for 2d Renderer and render
                 SortingCriteria sortingCriteria = SortingCriteria.CommonTransparent;
@@ -87,7 +95,9 @@ namespace CustomLighting
                 drawingSettings.overrideMaterial = _jumpFloodMaterial;
                 
                 // Render to texture set in OnCameraSetup
-                context.DrawRenderers(renderingData.cullResults, ref drawingSettings, ref _filteringSettings);
+                context.DrawRenderers(_settings.createdCullingResults, ref drawingSettings, ref _filteringSettings);
+
+                
             }
             
             using (new ProfilingScope(cmd, new ProfilingSampler(JUMP_FLOOD_PROFILER)))

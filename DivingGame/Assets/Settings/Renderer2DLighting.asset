@@ -23,9 +23,9 @@ MonoBehaviour:
       m_Bits: 192
     cameraScaleOffset: 1.75
     downscaleAmount: 2
-    samples: 50
+    samples: 75
     timeSpan: 8
-    blurStrength: 3
+    blurStrength: 2
     fancyBlur: 1
 --- !u!114 &11400000
 MonoBehaviour:
