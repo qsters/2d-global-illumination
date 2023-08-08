@@ -7,7 +7,7 @@ Material:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: FlashLightWallMaterial
+  m_Name: GemLight
   m_Shader: {fileID: 4800000, guid: caacdb42888cf4bf3892a9770685ad16, type: 3}
   m_Parent: {fileID: 0}
   m_ModifiedSerializedProperties: 0
@@ -41,8 +41,10 @@ Material:
         m_Offset: {x: 0, y: 0}
     m_Ints: []
     m_Floats:
-    - _EmissionAmount: 0
+    - _EmissionAmount: 1
     - _EnableExternalAlpha: 0
+    - _UseCustomSceneLighting: 0.663
+    - _WaterMultiplierColorAmount: 0
     m_Colors:
     - _Color: {r: 1, g: 1, b: 1, a: 1}
     - _Flip: {r: 1, g: 1, b: 1, a: 1}

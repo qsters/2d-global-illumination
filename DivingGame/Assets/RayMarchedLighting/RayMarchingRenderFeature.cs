@@ -28,6 +28,8 @@ namespace CustomLighting
             [SerializeField, Range(0f, 300f)] public float timeSpan = 2f;
             [SerializeField, Range(0f, 15f)] public float blurStrength = 5f;
             [SerializeField] public bool fancyBlur = true;
+            [SerializeField] public Color ambientColor = Color.black;
+            [SerializeField] public Color waterColor = Color.blue;
             
             // Used in Passes privately
             [HideInInspector] public CullingResults createdCullingResults;

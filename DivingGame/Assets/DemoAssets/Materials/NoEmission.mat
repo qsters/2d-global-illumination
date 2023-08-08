@@ -43,6 +43,8 @@ Material:
     m_Floats:
     - _EmissionAmount: 0
     - _EnableExternalAlpha: 0
+    - _UseCustomSceneLighting: 1
+    - _WaterMultiplierColorAmount: 1
     m_Colors:
     - _Color: {r: 1, g: 1, b: 1, a: 1}
     - _Flip: {r: 1, g: 1, b: 1, a: 1}

@@ -7,7 +7,9 @@ Shader "RayMarching/CustomLitShader"
         _NormalMap("Normal Map", 2D) = "bump" {}
 
         _EmissionAmount("Emission Amount", Range(0.0, 15.0)) = 0.0
-
+        _WaterMultiplierColorAmount("Water Multiplier Color Amount", Range(0.0, 1.0)) = 1.0
+        _UseCustomSceneLighting("Use Custom Scene Lighting", Range(0.0, 1.0)) = 1.0
+        
         // Legacy properties. They're here so that materials using this shader can gracefully fallback to the legacy sprite shader.
         [HideInInspector] _Color("Tint", Color) = (1,1,1,1)
         [HideInInspector] _RendererColor("RendererColor", Color) = (1,1,1,1)
@@ -75,6 +77,8 @@ Shader "RayMarching/CustomLitShader"
 
             half _UseSceneLighting;
             float _CameraScaleOffset;
+            float _UseCustomSceneLighting;
+            
             
             Varyings CombinedShapeLightVertex(Attributes v)
             {
@@ -108,9 +112,10 @@ Shader "RayMarching/CustomLitShader"
                 
                 half alpha = main.a;
                 half4 litColor = main * lightMap;
-                litColor.a = alpha;
+                half4 finalColor = lerp(main, litColor, _UseCustomSceneLighting);
+                finalColor.a = alpha;
                 
-                return lerp(main, litColor, _UseSceneLighting);
+                return lerp(main, finalColor, _UseSceneLighting);
             }
             ENDHLSL
         }
@@ -148,8 +153,10 @@ Shader "RayMarching/CustomLitShader"
             sampler2D _MainTex;
             float4 _MainTex_TexelSize;
             float _EmissionAmount;
+            float _WaterMultiplierColorAmount;
             float4 _Color;
             half4 _RendererColor;
+            float4 _waterMultiplierColor;
 
             v2f vert(appdata v)
             {
@@ -171,6 +178,8 @@ Shader "RayMarching/CustomLitShader"
                 }
                 
                 main.a = _EmissionAmount + 1;
+                float3 multipliedColor = main.rgb * _waterMultiplierColor.rgb;
+                main.rgb = lerp(main.rgb, multipliedColor, _WaterMultiplierColorAmount);
                 main.rgb *= _EmissionAmount;
                 
                 return main;

@@ -92,6 +92,8 @@ namespace CustomLighting
                 SortingCriteria sortingCriteria = SortingCriteria.CommonTransparent;
                 DrawingSettings drawingSettings = CreateDrawingSettings(_emissionShaderTagId, ref renderingData, sortingCriteria);
                 
+                cmd.SetGlobalColor("_waterMultiplierColor", _settings.waterColor);
+                
                 // render 
                 context.DrawRenderers(_settings.createdCullingResults, ref drawingSettings, ref filteringSettings);
                 cmd.SetGlobalTexture(EMISSION_TEXTURE_NAME, _emissionTexture);
@@ -104,6 +106,7 @@ namespace CustomLighting
                 cmd.SetGlobalFloat("_time", Time.timeSinceLevelLoad % 10);
                 cmd.SetGlobalInt("_samples", _settings.samples);
                 cmd.SetGlobalFloat("_OneOverTimeSpan", 1f / _settings.timeSpan);
+                cmd.SetGlobalColor("_ambientColor", _settings.ambientColor);
                 
                 
                 if (Time.frameCount % 2 == 0)

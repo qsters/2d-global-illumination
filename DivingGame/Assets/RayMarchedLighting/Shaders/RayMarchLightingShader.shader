@@ -49,6 +49,7 @@ Shader "RayMarching/RayMarchLighting"
             float _OneOverTimeSpan;
             int _samples; // Samples per pixel
             float2 _AspectRatio;
+            float4 _ambientColor;
 
             // Random Function between 0 and 1
             float random01(float2 co)
@@ -73,7 +74,7 @@ Shader "RayMarching/RayMarchLighting"
                     float2 clampedPos = clamp(currentPos, 0, 1);
                     if (totalDistance > _AspectRatio.x || any(clampedPos != currentPos))
                     {
-                        return 0;
+                        return _ambientColor.rgb;
                     }
 
                     // If within a certain distance, return the emission color
@@ -88,7 +89,7 @@ Shader "RayMarching/RayMarchLighting"
                 }
 
                 // Return black if no object is hit
-                return float3(0, 0, 0);
+                return _ambientColor.rgb;
             }
             
             v2f vert (appdata_base v)

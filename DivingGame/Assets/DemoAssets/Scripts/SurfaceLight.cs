@@ -14,15 +14,23 @@ public class SurfaceLight : MonoBehaviour
 
     private Transform _thisTransform;
     private Material _emissionMat;
+    private int _emissionAmountID;
+    
     
     private void Awake()
     {
         _thisTransform = GetComponent<Transform>();
         _emissionMat = GetComponent<SpriteRenderer>().material;
+        _emissionAmountID = Shader.PropertyToID("_EmissionAmount");
     }
     
     void Update()
     {
+        // Returning if no need to update position
+        float _distanceFromPlayer = _thisTransform.position.y - playerTransform.position.y;
+        if (_distanceFromPlayer > _playerOffset * 1.5)
+            return;
+        
         Vector3 newPosition = playerTransform.position;
         float playerDepth = -newPosition.y;
         
@@ -33,6 +41,6 @@ public class SurfaceLight : MonoBehaviour
         
         // Emission Level set by player depth
         float currentEmission = Mathf.Lerp(MaxEmission, MinEmission, playerDepth / MaxLightDepth);
-        _emissionMat.SetFloat("_EmissionAmount", currentEmission);
+        _emissionMat.SetFloat(_emissionAmountID, currentEmission);
     }
 }
