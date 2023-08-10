@@ -22,13 +22,13 @@ MonoBehaviour:
       serializedVersion: 2
       m_Bits: 192
     cameraScaleOffset: 1.75
-    targetFrameRate: 60
+    targetFrameRate: 45
     useAdaptiveSamples: 1
     downscaleAmount: 2
     samples: 75
     timeSpan: 6
     blurStrength: 3
-    fancyBlur: 0
+    fancyBlur: 1
     ambientColor: {r: 0, g: 0, b: 0, a: 1}
     waterColor: {r: 0, g: 0.9495225, b: 1, a: 1}
 --- !u!114 &11400000

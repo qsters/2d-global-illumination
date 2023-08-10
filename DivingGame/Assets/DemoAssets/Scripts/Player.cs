@@ -10,9 +10,10 @@ public class Player : MonoBehaviour
     public static Player singleton;
 
     [SerializeField] private TextMeshProUGUI _scoreText;
+    [SerializeField] public float secondsWithoutResurface = 10f;
     
     private int _currentScore;
-    
+    public float secondsLeft;
 
     private void Start()
     {
@@ -25,6 +26,13 @@ public class Player : MonoBehaviour
             Destroy(gameObject);
         }
         _scoreText.text = _currentScore.ToString();
+        
+        secondsLeft = secondsWithoutResurface;
+    }
+    
+    private void Update()
+    {
+        secondsLeft -= Time.deltaTime;
     }
 
     // Add to score

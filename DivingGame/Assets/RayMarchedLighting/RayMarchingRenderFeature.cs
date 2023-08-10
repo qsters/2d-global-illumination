@@ -45,8 +45,6 @@ namespace CustomLighting
         
         [SerializeField] public PassSettings _settings;
         
-        
-
 
         // Passes
         private JumpFloodPass _jumpFloodPass;

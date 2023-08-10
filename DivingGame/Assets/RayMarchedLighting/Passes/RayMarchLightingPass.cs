@@ -109,14 +109,18 @@ namespace CustomLighting
 #if UNITY_EDITOR
                 if (Application.isPlaying)
                 {
-                    _samplesThisFrame = _settings.useAdaptiveSamples? GetAdaptiveSamples() : _settings.samples;
+                    if (_settings.useAdaptiveSamples)
+                    {
+                        _samplesThisFrame = GetAdaptiveSamples();
+                    }
                 }
 #else
-                _samplesThisFrame = _settings.useAdaptiveSamples? GetAdaptiveSamples() : _settings.samples;
+                if (_settings.useAdaptiveSamples)
+                {
+                    _samplesThisFrame = GetAdaptiveSamples();
+                }
 #endif
-
-                Debug.Log(_samplesThisFrame);
-                
+               
                 cmd.SetGlobalFloat("_frameCount", Time.frameCount);
                 cmd.SetGlobalFloat("_time", Time.timeSinceLevelLoad % 10);
                 cmd.SetGlobalInt("_samples", _samplesThisFrame);
@@ -193,10 +197,9 @@ namespace CustomLighting
             float frameRate = 1.0f / Time.deltaTime;
             float frameDifference = frameRate - _settings.targetFrameRate;
             int differenceSign = (int)Mathf.Sign(frameDifference);
-            Debug.Log(differenceSign);
             int samples = _samplesThisFrame;
             
-            if (Mathf.Abs(frameDifference) >= 5f)
+            if (Mathf.Abs(frameDifference) >= 10f)
             {
                 // int magnitude = frameDifference
                 samples += 2 * differenceSign;
