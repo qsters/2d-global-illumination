@@ -34,6 +34,8 @@ namespace CustomLighting
         private ShaderTagId _emissionShaderTagId;
         
         private Material _debugMaterial;
+
+        private int _samplesThisFrame;
         
         public RayMarchLightingPass(RayMarchingRenderFeature.PassSettings settings, Material rayMarchLightingMaterial, Material debugMaterial)
         {
@@ -42,6 +44,8 @@ namespace CustomLighting
             _rayMarchLightingMaterial = rayMarchLightingMaterial;
             renderPassEvent = _settings.renderPassEvent;
             _debugMaterial = debugMaterial;
+
+            _samplesThisFrame = _settings.samples;
             
             _emissionShaderTagId = new ShaderTagId("EmissionRendering");
         }
@@ -102,9 +106,20 @@ namespace CustomLighting
             
             using (new ProfilingScope(cmd, new ProfilingSampler(LIGHTING_PROFILER)))
             {
+#if UNITY_EDITOR
+                if (Application.isPlaying)
+                {
+                    _samplesThisFrame = _settings.useAdaptiveSamples? GetAdaptiveSamples() : _settings.samples;
+                }
+#else
+                _samplesThisFrame = _settings.useAdaptiveSamples? GetAdaptiveSamples() : _settings.samples;
+#endif
+
+                Debug.Log(_samplesThisFrame);
+                
                 cmd.SetGlobalFloat("_frameCount", Time.frameCount);
                 cmd.SetGlobalFloat("_time", Time.timeSinceLevelLoad % 10);
-                cmd.SetGlobalInt("_samples", _settings.samples);
+                cmd.SetGlobalInt("_samples", _samplesThisFrame);
                 cmd.SetGlobalFloat("_OneOverTimeSpan", 1f / _settings.timeSpan);
                 cmd.SetGlobalColor("_ambientColor", _settings.ambientColor);
                 
@@ -170,6 +185,26 @@ namespace CustomLighting
             context.ExecuteCommandBuffer(cmd);
             cmd.Clear();
             CommandBufferPool.Release(cmd);
+        }
+
+        private int GetAdaptiveSamples()
+        {
+            // get frame rate
+            float frameRate = 1.0f / Time.deltaTime;
+            float frameDifference = frameRate - _settings.targetFrameRate;
+            int differenceSign = (int)Mathf.Sign(frameDifference);
+            Debug.Log(differenceSign);
+            int samples = _samplesThisFrame;
+            
+            if (Mathf.Abs(frameDifference) >= 5f)
+            {
+                // int magnitude = frameDifference
+                samples += 2 * differenceSign;
+            }
+
+            samples = Mathf.Clamp(samples, 1, _settings.samples);
+
+            return samples;
         }
 
         // Dispose of textures

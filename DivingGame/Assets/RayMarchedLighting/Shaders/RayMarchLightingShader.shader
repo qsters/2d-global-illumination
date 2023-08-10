@@ -156,6 +156,7 @@ Shader "RayMarching/RayMarchLighting"
 
             sampler2D _MainTex;
             float4 _MainTex_TexelSize;
+
             
             uint _gridSize;
 	        float _spread;

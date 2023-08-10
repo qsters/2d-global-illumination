@@ -23,6 +23,8 @@ namespace CustomLighting
             [SerializeField] public RenderPassEvent renderPassEvent = RenderPassEvent.AfterRenderingOpaques;
             [SerializeField] public LayerMask layerMask = -1;
             [SerializeField] public float cameraScaleOffset = 1.5f;
+            [SerializeField] public int targetFrameRate = 30;
+            [SerializeField] public bool useAdaptiveSamples = true;
             [SerializeField, Range(0, 3)] public int downscaleAmount = 1;
             [SerializeField, Range(1, 1000)] public int samples = 5;
             [SerializeField, Range(0f, 300f)] public float timeSpan = 2f;
