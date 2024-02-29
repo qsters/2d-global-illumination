@@ -26,7 +26,7 @@ MonoBehaviour:
     useAdaptiveSamples: 1
     downscaleAmount: 2
     samples: 75
-    timeSpan: 6
+    timeSpan: 17
     blurStrength: 3
     fancyBlur: 1
     ambientColor: {r: 0, g: 0, b: 0, a: 1}

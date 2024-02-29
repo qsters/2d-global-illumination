@@ -10,6 +10,6 @@ public class TimeRemainingScript : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        _timeRemainingText.text = Player.singleton.secondsLeft.ToString("F2");
+        _timeRemainingText.text = Player.singleton.TimeToDeath().ToString("F2");
     }
 }

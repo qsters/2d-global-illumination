@@ -9,7 +9,7 @@ public class SafeZone : MonoBehaviour
     {
         if (col.CompareTag("Player"))
         {
-            Player.singleton.secondsLeft = Player.singleton.secondsWithoutResurface;
+            Player.singleton.Resurface();
         }
     }
 }

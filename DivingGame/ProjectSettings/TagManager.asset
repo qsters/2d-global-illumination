@@ -9,12 +9,12 @@ TagManager:
   - Default
   - TransparentFX
   - Ignore Raycast
-  - 
+  - Rope
   - Water
   - UI
   - Occluders
   - Emitters
-  - 
+  - Player
   - 
   - 
   - 

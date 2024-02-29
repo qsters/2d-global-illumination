@@ -20,14 +20,14 @@ public class PlayerMover : MonoBehaviour
         actions.Swimming.PointerPosition.performed += RotatePlayer;
     }
 
-    private void Update()
+    private void FixedUpdate()
     {
         bool movingForwardHeld = actions.Swimming.SwimForward.ReadValue<float>() > 0.1f;
 
         if (movingForwardHeld)
         {
             // Apply force to the rigidbody
-            playerRigidbody.AddForce(transform.up * (Time.deltaTime * swimSpeed));
+            playerRigidbody.AddForce(transform.up * (Time.fixedDeltaTime * swimSpeed));
         }
     }
 
