@@ -24,7 +24,7 @@ MonoBehaviour:
     cameraScaleOffset: 1.75
     targetFrameRate: 45
     useAdaptiveSamples: 1
-    downscaleAmount: 2
+    downscaleAmount: 1
     samples: 75
     timeSpan: 17
     blurStrength: 3
@@ -50,6 +50,9 @@ MonoBehaviour:
   - {fileID: -3066654663120277770}
   m_RendererFeatureMap: f6aeebebd40d71d5
   m_UseNativeRenderPass: 0
+  m_LayerMask:
+    serializedVersion: 2
+    m_Bits: 4294967295
   m_TransparencySortMode: 0
   m_TransparencySortAxis: {x: 0, y: 1, z: 0}
   m_HDREmulationScale: 1
